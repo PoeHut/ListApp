@@ -18,6 +18,12 @@ const DetailScreen = ({route}) => {
         dispatch(fetchBookByID(id))
     }, [])
 
+    //remove html tag from response data
+    const getDescription = () => {
+        const regex = /(<([^>]+)>)/ig;
+        return book.volumeInfo.description.replace(regex, '');
+    }
+
     //when there is no data in reducer
     if(loading || !book) {
         return (
@@ -26,13 +32,13 @@ const DetailScreen = ({route}) => {
             </View>
         )
     }
- 
+    
     return (
         <Card>
            <View style={styles.imageContainer}>
             {
             book.volumeInfo.imageLinks ?
-                <Image style={styles.image} source={{uri: book.volumeInfo.imageLinks.medium}} />
+                <Image style={styles.image} source={{uri: book.volumeInfo.imageLinks.smallThumbnail}} />
             :
                 <Image source={require('../../assets/img/no-boo-cover.jpg')} style={styles.image} />
             }
@@ -47,9 +53,7 @@ const DetailScreen = ({route}) => {
                             )
                         })
                     }
-                </View>
-
-                
+                </View>                
             </View>
             
             <CardSection>
@@ -66,7 +70,7 @@ const DetailScreen = ({route}) => {
 
                         <View>
                             <Text style={styles.titleStyle}>Description</Text>               
-                            <Text style={styles.boxTxt}>Pages: {book.volumeInfo.description}</Text>
+                            <Text style={styles.boxTxt}>Pages: {getDescription()}</Text>                           
                         </View>
                     </View>
                 </ScrollView>

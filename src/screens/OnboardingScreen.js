@@ -5,9 +5,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const OnboardingScreen = ({navigation}) => {
-
+    
     const completeOnboarding = () => {
-        AsyncStorage.setItem('DoneOnboarding', "true")
+        AsyncStorage.setItem('DoneOnboarding', "done")
         navigation.replace("Main")
     }
 

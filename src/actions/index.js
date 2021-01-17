@@ -10,9 +10,9 @@ export const fetchData = (searchTerm) => {
         })
 
         const response = await googleAPI.get('/', {
-                params: {
+            params: {
                 q: searchTerm,
-                maxResults: 24
+                maxResults: 12
             }
         });
         
